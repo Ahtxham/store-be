@@ -9,7 +9,7 @@
       "#Constants/*": ["./src/Constants/*"],
       "#Models/*": ["./src/Models/*"],
       "#Handlers/*": ["./src/Handlers/*"],
-      "#Middleware/*": ["./src/Middleware/*"],
+      "#Middleware/*": ["./src/Middleware/*"]
     }
   }
 }
