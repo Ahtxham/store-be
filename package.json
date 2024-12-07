@@ -1,0 +1,66 @@
+{
+	"name": "server-mongo",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha",
+		"start": "nodemon ./src"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@google-cloud/translate": "^7.2.0",
+		"aws-sdk": "^2.1676.0",
+		"axios": "^0.26.1",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.19.0",
+		"chalk": "^5.1.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"ejs": "^2.6.2",
+		"express": "^4.17.1",
+		"express-promise-router": "^3.0.3",
+		"fs": "0.0.1-security",
+		"generate-password": "^1.7.0",
+		"google-translate": "^3.0.0",
+		"handlebars": "^4.7.6",
+		"https": "^1.0.0",
+		"joi": "^14.3.1",
+		"jsonwebtoken": "^8.5.1",
+		"loadash": "^1.0.0",
+		"lodash": "^4.17.21",
+		"moment": "^2.29.1",
+		"mongoose": "^5.8.11",
+		"morgan": "^1.9.1",
+		"multer": "^1.4.2",
+		"node-fetch": "^3.2.10",
+		"nodemailer": "^6.4.11",
+		"nodemailer-smtp-transport": "^2.7.4",
+		"passport": "^0.4.0",
+		"passport-jwt": "^4.0.0",
+		"passport-local": "^1.0.0",
+		"path": "^0.12.7",
+		"socket.io": "^2.3.0",
+		"stripe": "^11.9.1"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"plugin:prettier/recommended"
+		]
+	},
+	"devDependencies": {
+		"nodemon": "^1.19.4"
+	},
+	"imports": {
+		"#src/*": "./src/*",
+		"#Controllers/*": "./src/Controllers/*",
+		"#Routes/*": "./src/Routes/*",
+		"#Services/*": "./src/Services/*",
+		"#Constants/*": "./src/Constants/*",
+		"#Models/*": "./src/Models/*",
+		"#Handlers/*": "./src/Handlers/*",
+		"#Middleware/*": "./src/Middleware/*"
+	}
+}

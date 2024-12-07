@@ -1,0 +1,248 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,600,300" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ------------------------------------- 
+        TYPOGRAPHY 
+        ------------------------------------- */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            font-family: "Open Sans", sans-serif !important;
+            color: #354052 !important;
+        }
+
+        * {
+            font-family: "Open Sans", sans-serif !important;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .collapse {
+            margin: 0;
+            padding: 0;
+        }
+
+        .background-main {
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: none;
+            width: 100% !important;
+            height: 100%;
+            background-color: #E4E4E4 !important;
+        }
+
+        .custom-button {
+            border: 0px;
+            margin: 2rem 0rem;
+            font-size: 14px !important;
+            letter-spacing: .25px !important;
+            border-radius: 4px !important;
+            box-sizing: border-box !important;
+            color: #ffffff !important;
+            cursor: pointer !important;
+            background-color: #23396A;
+            height: 35px !important;
+            width: 200px;
+            text-align: center !important;
+            text-decoration: none !important;
+        }
+
+        .custom-button a {
+
+            color: #ffffff !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+        }
+
+        .background-white {
+            background-color: #fff !important;
+            border-top: 5px solid #23396a;
+        }
+
+        .text-center {
+            text-align: -webkit-center !important
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        .logo {
+            min-width: 100% !important;
+            margin-top: 4rem;
+        }
+
+        .logo img {
+            height: 64px;
+        }
+
+        .main-image {
+            padding-top: 28px;
+            padding-bottom: 38px;
+        }
+
+        .title {
+            text-align: left;
+            font: normal normal bold 30px/50px Source Sans Pro;
+            letter-spacing: 0px;
+            color: #354052;
+            opacity: 1;
+        }
+
+        .subtitle {
+            text-align: left;
+            font: normal normal 300 14px/22px Source Sans Pro;
+            letter-spacing: 0px;
+            color: #354052;
+        }
+
+        .text-muted {
+            font-size: 2vw !important;
+            color: #868686 !important;
+        }
+
+        .wid {
+            width: 35%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* -------------------------------------
+        FOOTER
+        ------------------------------------- */
+
+        .footer-title {
+            font-size: 4.5vw !important;
+            font-weight: bold !important;
+            color: #354052 !important;
+        }
+
+        .footer-subtitle {
+            font-size: 14px !important;
+            font-weight: 300 !important;
+            color: #354052 !important;
+        }
+
+        .footer-icons {
+            justify-content: center !important;
+            margin: 2rem 0rem !important;
+        }
+
+        .footer-icons img {
+
+            margin-right: 1rem !important;
+        }
+
+        .footer-copyrights {
+            font-size: 14px !important;
+            font-weight: 300 !important;
+            color: #354052 !important;
+        }
+
+        /* -------------------------------------------
+        PHONE
+        For clients that support media queries.
+        Nothing fancy.
+        -------------------------------------------- */
+
+
+        @media only screen and (max-width: 480px) {
+            .title {
+                font-size: 5vw !important;
+            }
+
+            .subtitle {
+                font-size: 4vw !important;
+            }
+
+            .wid {
+                width: 80%;
+                border-style: solid;
+                border-width: thin;
+                border-color: #dadce0;
+                border-radius: 8px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .background-main {
+                -webkit-font-smoothing: antialiased;
+                -webkit-text-size-adjust: none;
+                width: 100% !important;
+                height: 100%;
+                background-color: white !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-main">
+        <div class="wid">
+
+            <div class="background-white">
+                <br>
+                <div class="logo" style="padding:0 10%!important">
+                    <img src="{{assetsPath}}/logo.png" height="80px" width="80px">
+                </div>
+
+                <div style="padding:0 10%!important;text-align:justify!important; margin-top: 48px">
+
+                    <p class="title">
+                        Welcome To Node
+                    </p>
+                    <br>
+                    <hr>
+                    <br>
+                    <p class="subtitle">
+                        Your registration request is approved and we are happy to have you with us. We can't wait to see
+                        you seamlessly manage resources, become more efficient, and strengthen your teams.
+                    </p>
+
+                    <button class="custom-button">
+                        <a href="{{link}}" target="_blank"> Access Portal</a>
+                    </button>
+                    <br>
+                </div>
+                <br>
+            </div>
+            <div style="padding:2% 10%!important; background: #F5F5F5;">
+                <br>
+                <div style="width: 300px">
+                    <img src="{{assetsPath}}/logo.png" style="width: 115px">
+                </div>
+                <br>
+                <hr>
+                <br>
+                <p class="footer-subtitle">
+                    If you have any questions or concerns, we're here to help. Contact us via our social media, email or
+                    phone.
+                </p>
+                <div class="footer-icons">
+                    <a href="https://www.facebook.com" target="_blank"><img
+                            src="{{assetsPath}}/facebook.png" /></a>
+                    <a href="https://mobile.twitter.com" target="_blank"> <img
+                            src="{{assetsPath}}/twitter.png" /></a>
+                    <a href="https://www.instagram.com/" target="_blank"> <img
+                            src="{{assetsPath}}/instagram.png" /></a>
+                </div>
+
+                <p class="footer-copyrights">
+
+                    <b>hello@node-template </b><br>
+                    <b>0(000) 0-node-template</b>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
