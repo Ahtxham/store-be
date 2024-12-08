@@ -25,6 +25,8 @@ export const login = async (req: Request, res: Response) => {
     });
     const data = { token, user: user.toObject() };
     delete data.user.password;
+    delete data.user.__v;
+    delete data.user._id;
 
     res.status(statusCodes.OK).json(data);
   } catch (error) {
