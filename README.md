@@ -30,7 +30,7 @@ This project is a Node.js application built with TypeScript, featuring a MongoDB
 The following environment variables are required in the `.env` file:
 
 ```
-MONGODB_URI=<your_mongodb_connection_string>
+DB_URI=<your_mongodb_connection_string>
 SENDGRID_API_KEY=<your_sendgrid_api_key>
 AWS_ACCESS_KEY_ID=<your_aws_access_key_id>
 AWS_SECRET_ACCESS_KEY=<your_aws_secret_access_key>
