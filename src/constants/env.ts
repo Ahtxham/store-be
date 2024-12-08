@@ -11,3 +11,17 @@ export const JWT_SECRET = process.env.JWT_SECRET || "JWT_SECRET";
 export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || "";
 export const EMAIL_FROM = process.env.EMAIL_FROM || "";
 export const EMAIL_TO = process.env.EMAIL_TO || "";
+
+// AWS S3 Configuration Constants
+const REGION = process.env.AWS_REGION || "";
+const ACCESSKEYID = process.env.AWS_ACCESSKEYID || "";
+const SECRETACCESSKEY = process.env.AWS_SECRETACCESSKEY || "";
+const BUCKET_NAME = process.env.AWS_BUCKET_NAME || "";
+export const AWS = {
+  REGION,
+  ACCESSKEYID,
+  SECRETACCESSKEY,
+  BUCKET_NAME,
+};
+
+// sandgrid configuration
