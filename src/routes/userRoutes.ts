@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { getUserDetails, updateUser } from "../controllers/userController";
+import { userController } from "../controllers/user";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
 const router = Router();
 
-router.get("/profile", authMiddleware, getUserDetails);
-router.put("/profile", authMiddleware, updateUser);
+router.get("/profile", authMiddleware, userController.getUser);
+router.put("/profile", authMiddleware, userController.updateUser);
 
 export { router as userRoutes };

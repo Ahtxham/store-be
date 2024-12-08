@@ -1,14 +1,10 @@
-import dotenv from "dotenv";
 import express, { Application } from "express";
-import helmet from "helmet";
 import path from "path";
 
 // import GeneralHelper from '#Services/GeneralHelper';
 // import errorHandler from "./middlewares/errorHandler";
 import { routes } from "./routes";
-
-
-dotenv.config();
+import helmet from "helmet";
 
 const app: Application = express();
 

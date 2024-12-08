@@ -10,10 +10,9 @@ export const setupSocket = (server: HttpServer) => {
   });
 
   io.on("connection", (socket) => {
-    console.log("A user connected");
-
+    console.log("\x1b[33m%s\x1b[0m", "A user connected");
     socket.on("disconnect", () => {
-      console.log("User disconnected");
+      console.log("\x1b[33m%s\x1b[0m", "User disconnected");
     });
 
     // Add your socket event handlers here

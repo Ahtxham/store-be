@@ -1,9 +1,9 @@
 import http from "http";
 import https from "https";
 import fs from "fs";
-import app from "./app";
 
-const { SSL_KEY, SSL_CRT, MODE } = process.env;
+import { SSL_KEY, SSL_CRT, MODE } from "@constants/env";
+import app from "./app";
 
 const options: https.ServerOptions = {
   key: SSL_KEY && fs.existsSync(SSL_KEY) ? fs.readFileSync(SSL_KEY) : undefined,

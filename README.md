@@ -15,7 +15,7 @@ This project is a Node.js application built with TypeScript, featuring a MongoDB
 1. Clone the repository:
    ```
    git clone <repository-url>
-   cd my-nodejs-project
+   cd store-be
    ```
 
 2. Install dependencies:
