@@ -28,27 +28,27 @@ export const uploadFileToAws = async (
   filePath: string
 ): Promise<string> => {
   try {
-    const uploadParams = {
+    // Upload the file to S3
+    await s3Client.send(new PutObjectCommand({
       Bucket: AWS.BUCKET_NAME,
       Key: fileName,
       Body: fs.createReadStream(filePath),
-    };
-
-    // Upload the file to S3
-    await s3Client.send(new PutObjectCommand(uploadParams)).then(() => {
+      ACL: 'public-read',
+      ContentType: 'image/jpeg'
+    })).then(() => {
       // Delete the file from the local filesystem after successful upload
       if (fs.existsSync(filePath)) {
         fs.unlink(filePath, (err) => {
           if (err) {
             console.error("Error deleting file:", err);
-          } else {
-            console.log("File deleted successfully.");
           }
         });
       }
     });
 
-    return "success";
+    const publicUrl = `https://${AWS.BUCKET_NAME}.s3.${AWS.REGION}.amazonaws.com/${fileName}`;
+
+    return publicUrl;
   } catch (err) {
     console.error("Error ", err);
     return "error";
