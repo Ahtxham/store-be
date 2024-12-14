@@ -1,4 +1,3 @@
-!default.jpg
 /node_modules
 /public/hot
 /public/storage
@@ -7,8 +6,8 @@
 /vendor
 /.idea
 /.vagrant
-/Uploads/*
-/dump
+/uploads/*
+/dump/*
 Homestead.json
 Homestead.yaml
 npm-debug.log
