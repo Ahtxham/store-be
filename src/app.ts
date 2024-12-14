@@ -14,8 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Static files
-app.use("/Uploads", express.static(path.join(__dirname, "Uploads")));
-app.use("/Assets", express.static(path.join(__dirname, "Assets")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Routes
 app.use("/", routes);
