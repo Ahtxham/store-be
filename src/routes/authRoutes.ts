@@ -1,9 +1,15 @@
 import { Router } from "express";
 import { authController } from "@controllers/auth";
-import { generalHelper } from "@services/generalHelper";
+import { uploadHelper } from "@utils/uploadHelper";
 
+const fileHelper = uploadHelper("./uploads/profiles").single("profile");
 const router = Router();
-router.post("/register", generalHelper.upload.single('file'), authController.register);
-router.post("/login", authController.login);
+
+router.post("/register", fileHelper, (req, res, next) => {
+  authController.register(req, res).catch(next);
+});
+router.post("/login", (req, res, next) => {
+  authController.login(req, res).catch(next);
+});
 
 export { router as authRoutes };

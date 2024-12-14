@@ -1,10 +1,10 @@
 import express, { Application } from "express";
 import path from "path";
+import helmet from "helmet";
 
 // import GeneralHelper from '#Services/GeneralHelper';
-// import errorHandler from "./middlewares/errorHandler";
+import errorMiddleware from "@middlewares/errorMiddleware";
 import { routes } from "./routes";
-import helmet from "helmet";
 
 const app: Application = express();
 
@@ -21,7 +21,7 @@ app.use("/Assets", express.static(path.join(__dirname, "Assets")));
 app.use("/", routes);
 
 // Error Handling
-// app.use(errorHandler.notFound);
-// app.use(errorHandler.internalServerError);
+app.use(errorMiddleware.notFound);
+app.use(errorMiddleware.internalServerError);
 
 export default app;

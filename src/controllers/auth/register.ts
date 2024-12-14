@@ -4,39 +4,36 @@ import jwt from "jsonwebtoken";
 
 import { statusCodes } from "@constants/statusCodes";
 import { User } from "@models/userModel";
-import { JWT_SECRET } from "@constants/env";
+import { JWT_SECRET, SERVER_URL, AWS } from "@constants/env";
 import { uploadFileToAws } from "@config/s3";
-import fs from 'fs/promises';
 
 const saltRounds = 10;
 
-declare global {
-  namespace Express {
-    interface Request {
-      file?: any;
-    }
-  }
-}
-
-
-export const register = async (req: Request, res: Response) => {
+export const register = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
-    const { email, username, password, dob, gender, image } = req.body;
+    const { email, username, password, dob, gender } = req.body;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    let s3_img: string = '';
+    let s3_img: string = "";
 
     if (req.file) {
       const { filename, path } = req.file;
-      try {
-        let keyName = `users/profile/${filename}`;
+      if (AWS.ACCESSKEYID === "") {
+        s3_img = `${SERVER_URL}/${path}`;
+      } else {
+        try {
+          let keyName = `users/profile/${filename}`;
           s3_img = await uploadFileToAws(keyName, path);
-      } catch (error) {
+        } catch (error) {
           console.error("Error during S3 upload:", error);
           throw new Error("Image upload failed");
+        }
       }
     }
-    
+
     const newUser = new User({
       email,
       username: username || email,

@@ -7,13 +7,14 @@ export const authMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
-    return res
+    res
       .status(statusCodes.UNAUTHORIZED)
       .json({ message: "Access denied. No token provided." });
+    return;
   }
 
   try {

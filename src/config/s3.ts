@@ -18,40 +18,39 @@ export const s3Client = new S3Client({
 });
 
 // Export folder names for easier reference
-export const awsFolderNames = {
-  sub1: "sub1",
-  sub2: "sub2",
-};
 
 export const uploadFileToAws = async (
   fileName: string,
   filePath: string
 ): Promise<string> => {
   try {
-    // Upload the file to S3
-    await s3Client.send(new PutObjectCommand({
-      Bucket: AWS.BUCKET_NAME,
-      Key: fileName,
-      Body: fs.createReadStream(filePath),
-      ACL: 'public-read',
-      ContentType: 'image/jpeg'
-    })).then(() => {
-      // Delete the file from the local filesystem after successful upload
-      if (fs.existsSync(filePath)) {
-        fs.unlink(filePath, (err) => {
-          if (err) {
-            console.error("Error deleting file:", err);
-          }
-        });
-      }
-    });
+    await s3Client
+      .send(
+        new PutObjectCommand({
+          Bucket: AWS.BUCKET_NAME,
+          Key: fileName,
+          Body: fs.createReadStream(filePath),
+          ACL: "public-read",
+          ContentType: "image/jpeg",
+        })
+      )
+      .then(() => {
+        // Delete the file from the local filesystem after successful upload
+        if (fs.existsSync(filePath)) {
+          fs.unlink(filePath, (err) => {
+            if (err) {
+              console.error("Error deleting file:", err);
+            }
+          });
+        }
+      });
 
     const publicUrl = `https://${AWS.BUCKET_NAME}.s3.${AWS.REGION}.amazonaws.com/${fileName}`;
 
     return publicUrl;
   } catch (err) {
     console.error("Error ", err);
-    return "error";
+    throw new Error(err as string);
   }
 };
 
