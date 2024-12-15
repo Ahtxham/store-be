@@ -12,6 +12,8 @@ const options: https.ServerOptions = {
 };
 
 const server =
-  MODE === "DEV" ? http.createServer(app) : https.createServer(options, app);
+  MODE === "development"
+    ? http.createServer(app)
+    : https.createServer(options, app);
 
 export { server };

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { statusCodes } from "@constants/statusCodes";
 import { User } from "@models/userModel";
-import { sendEmail } from "@config/sendgrid";
+import { sendEmail } from "@utils/emailHelper";
 import otpService from "@services/otpService";
 
 export const forgotPasswordOtp = async (
@@ -25,7 +25,7 @@ export const forgotPasswordOtp = async (
     }
 
     const otp = otpService.generateOtp();
-    user.otp = otp; // Assuming you have an `otp` field in your user model
+    user.otp = otp;
     user.otpExpires = Date.now() + 3600000; // OTP expires in 1 hour
     await user.save();
 

@@ -1,9 +1,6 @@
-import { login } from "./login";
-import { register } from "./register";
-import { forgotPasswordLink } from "./forgotPasswordLink";
-
-export const authController = {
-  login,
-  register,
-  forgotPasswordLink,
-};
+export { login } from "./login";
+export { register } from "./register";
+export { forgotPasswordLink } from "./forgotPasswordLink";
+export { forgotPasswordOtp } from "./forgotPasswordOtp";
+export { resetPassword } from "./resetPassword";
+export { validateOtp } from "./validateOtp";

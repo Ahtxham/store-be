@@ -2,6 +2,7 @@ import multer, { StorageEngine } from "multer";
 import { Request } from "express";
 import fs from "fs";
 import path from "path";
+import { LOGUI } from "@constants/logs";
 
 const createStorage = (destinationPath: string): StorageEngine => {
   return multer.diskStorage({
@@ -27,7 +28,10 @@ const uploadHelper = (destinationPath: string) => {
     throw new Error("Destination path is required");
   }
   if (!fs.existsSync(destinationPath)) {
-    console.log(`${destinationPath} path does not exist. Creating one...`);
+    console.log(
+      LOGUI.FgYellow,
+      `${destinationPath} path does not exist. Creating one...`
+    );
     fs.mkdirSync(destinationPath, { recursive: true });
   }
   return multer({ storage: createStorage(destinationPath) });

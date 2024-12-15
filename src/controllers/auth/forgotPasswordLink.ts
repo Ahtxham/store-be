@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
+
 import { statusCodes } from "@constants/statusCodes";
-import { User } from "@models/userModel";
-import { JWT_SECRET } from "@constants/env";
-import { sendEmail } from "@config/sendgrid";
+
+import { sendEmail } from "@utils/emailHelper";
 import { generateToken } from "@utils/jwtHelper";
+import userService from "@services/userService";
 
 export const forgotPasswordLink = async (
   req: Request,
@@ -13,7 +13,7 @@ export const forgotPasswordLink = async (
   const { email, callback } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await userService.findUserByEmail(email);
     if (!user) {
       return res
         .status(statusCodes.NOT_FOUND)

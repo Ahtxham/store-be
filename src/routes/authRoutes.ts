@@ -1,22 +1,35 @@
 import { Router } from "express";
-import { authController } from "@controllers/auth";
 import { uploadHelper } from "@utils/uploadHelper";
+
+import {
+  register,
+  login,
+  forgotPasswordLink,
+  forgotPasswordOtp,
+  validateOtp,
+  resetPassword,
+} from "@controllers/auth";
 
 const fileHelper = uploadHelper("./uploads/profiles").single("profile");
 const router = Router();
 
 router.post("/register", fileHelper, (req, res, next) => {
-  authController.register(req, res).catch(next);
+  register(req, res).catch(next);
 });
 router.post("/login", (req, res, next) => {
-  authController.login(req, res).catch(next);
+  login(req, res).catch(next);
 });
 router.post("/forgot-password-link", (req, res, next) => {
-  authController.forgotPasswordLink(req, res).catch(next);
+  forgotPasswordLink(req, res).catch(next);
 });
-
-// router.post("/forgot-password-otp", forgotPasswordOtp);
-// router.post("/validate-otp", validateOtp);
-// router.post("/reset-password", resetPassword);
+router.post("/forgot-password-otp", (req, res, next) => {
+  forgotPasswordOtp(req, res).catch(next);
+});
+router.post("/validate-otp", (req, res, next) => {
+  validateOtp(req, res).catch(next);
+});
+router.post("/reset-password", (req, res, next) => {
+  resetPassword(req, res).catch(next);
+});
 
 export { router as authRoutes };
