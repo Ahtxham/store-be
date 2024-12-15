@@ -11,6 +11,7 @@ export const setupSocket = (server: HttpServer | HttpsServer) => {
       allowedHeaders: ["Authorization"],
     },
     path: "/ws",
+    transports: ["websocket"],
   });
 
   io.on("connection", (socket) => {
