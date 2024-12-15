@@ -1,12 +1,8 @@
-import { request, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import { Request, Response } from "express";
 
 import { statusCodes } from "@constants/statusCodes";
 import { IUser, User } from "@models/userModel";
-import { JWT_SECRET, SERVER_URL, AWS } from "@constants/env";
-import { uploadFileToAws } from "@config/s3";
 import { hashPassword } from "@utils/passwordHelper";
-import userService from "@services/userService";
 import { handleFileUpload } from "@utils/fileHelper";
 import { generateToken } from "@utils/jwtHelper";
 
