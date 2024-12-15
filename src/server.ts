@@ -1,19 +1,28 @@
-import http from "http";
-import https from "https";
+import { createServer as HttpServer } from "http";
+import { createServer as HttpsServer } from "https";
 import fs from "fs";
-
-import { SSL_KEY, SSL_CRT, MODE } from "@constants/env";
+import path from "path";
+import { MODE } from "@constants/env";
 import app from "./app";
 
-const options: https.ServerOptions = {
-  key: SSL_KEY && fs.existsSync(SSL_KEY) ? fs.readFileSync(SSL_KEY) : undefined,
-  cert:
-    SSL_CRT && fs.existsSync(SSL_CRT) ? fs.readFileSync(SSL_CRT) : undefined,
+// Load SSL certificates
+const options = {
+  key: fs.readFileSync(
+    path.resolve(__dirname, "../assets/certs/key.pem"),
+    "utf8"
+  ),
+  cert: fs.readFileSync(
+    path.resolve(__dirname, "../assets/certs/cert.pem"),
+    "utf8"
+  ),
 };
 
+// Create HTTPS server
 const server =
   MODE === "development"
-    ? http.createServer(app)
-    : https.createServer(options, app);
+    ? HttpServer(app)
+    : HttpsServer(options, app);
+
+// const server = HttpsServer(options, app);
 
 export { server };
