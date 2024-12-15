@@ -11,5 +11,12 @@ router.post("/register", fileHelper, (req, res, next) => {
 router.post("/login", (req, res, next) => {
   authController.login(req, res).catch(next);
 });
+router.post("/forgot-password-link", (req, res, next) => {
+  authController.forgotPasswordLink(req, res).catch(next);
+});
+
+// router.post("/forgot-password-otp", forgotPasswordOtp);
+// router.post("/validate-otp", validateOtp);
+// router.post("/reset-password", resetPassword);
 
 export { router as authRoutes };

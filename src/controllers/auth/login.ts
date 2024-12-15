@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { statusCodes } from "@constants/statusCodes";
 import { User } from "@models/userModel";
 import { JWT_SECRET } from "@constants/env";
+import { comparePasswords } from "@utils/passwordHelper";
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body;
@@ -17,7 +17,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         .json({ message: "Invalid credentials" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await comparePasswords(password, user.password);
     if (!isMatch) {
       return res
         .status(statusCodes.UNAUTHORIZED)

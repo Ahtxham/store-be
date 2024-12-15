@@ -1,13 +1,11 @@
 import { request, Request, Response } from "express";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { statusCodes } from "@constants/statusCodes";
 import { User } from "@models/userModel";
 import { JWT_SECRET, SERVER_URL, AWS } from "@constants/env";
 import { uploadFileToAws } from "@config/s3";
-
-const saltRounds = 10;
+import { hashPassword } from "@utils/passwordHelper";
 
 export const register = async (
   req: Request,
@@ -15,7 +13,7 @@ export const register = async (
 ): Promise<Response> => {
   try {
     const { email, username, password, dob, gender } = req.body;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await hashPassword(password);
 
     let s3_img: string = "";
 

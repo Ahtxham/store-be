@@ -15,6 +15,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  otp: {
+    type: String,
+    required: false,
+  },
+  otpExpires: {
+    type: Date,
+    required: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -36,3 +44,13 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 export { User };
+
+export interface IUser extends mongoose.Document {
+  email: string;
+  username: string;
+  password?: string;
+  createdAt: Date;
+  dob?: Date;
+  gender?: string;
+  image?: string;
+}

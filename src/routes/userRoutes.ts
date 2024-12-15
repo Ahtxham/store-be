@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { userController } from "../controllers/user";
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { userController } from "@controllers/user";
+import { authMiddleware } from "@middlewares/authMiddleware";
 import { uploadHelper } from "@utils/uploadHelper";
 
 const fileHelper = uploadHelper("./uploads/profiles").single("profile");
@@ -12,5 +12,8 @@ router.get("/profile", authMiddleware, (req, res, next) => {
 });
 router.put("/profile", authMiddleware, fileHelper, (req, res, next) => {
   userController.updateUser(req, res).catch(next);
+});
+router.put("/change-password", authMiddleware, (req, res, next) => {
+  userController.changePassword(req, res).catch(next);
 });
 export { router as userRoutes };

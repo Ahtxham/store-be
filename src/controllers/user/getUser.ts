@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { statusCodes } from "@constants/statusCodes";
-import { userService } from "@services/userService";
+import userService from "@services/userService";
 
 export const getUser = async (
   req: Request,
@@ -14,10 +14,6 @@ export const getUser = async (
         .status(statusCodes.NOT_FOUND)
         .json({ message: "User not found" });
     }
-    user = user.toObject();
-    delete user.password;
-    delete user.__v;
-    delete user._id;
     return res.status(statusCodes.ACCEPTED).json(user);
   } catch (error) {
     return res
