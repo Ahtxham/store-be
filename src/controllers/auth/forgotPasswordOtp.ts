@@ -3,6 +3,7 @@ import { statusCodes } from "@constants/statusCodes";
 import { User } from "@models/userModel";
 import { sendEmail } from "@utils/emailHelper";
 import otpService from "@services/otpService";
+import { AUTH_CONFIG } from "@config/constants";
 
 export const forgotPasswordOtp = async (
   req: Request,
@@ -26,7 +27,7 @@ export const forgotPasswordOtp = async (
 
     const otp = otpService.generateOtp();
     user.otp = otp;
-    user.otpExpires = Date.now() + 3600000; // OTP expires in 1 hour
+    user.otpExpires = new Date(Date.now() + AUTH_CONFIG.OTP_EXPIRES_IN);
     await user.save();
 
     await sendEmail(user.email, "Password Reset OTP", `Your OTP is: ${otp}`);

@@ -12,7 +12,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user) {
+    if (!user || !user.password) {
       return res
         .status(statusCodes.UNAUTHORIZED)
         .json({ message: "Invalid credentials" });
@@ -24,14 +24,13 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         .status(statusCodes.UNAUTHORIZED)
         .json({ message: "Invalid credentials" });
     }
-
     const token = generateToken({ id: user._id });
-    const data = { token, user: user.toObject() };
-    delete data.user.password;
-    delete data.user.__v;
-    delete data.user._id;
 
-    return res.status(statusCodes.OK).json(data);
+    let userObj = user.toObject();
+    delete userObj.password;
+    delete userObj.__v;
+
+    return res.status(statusCodes.OK).json({ token, ...userObj, });
   } catch (error) {
     return res
       .status(statusCodes.UNAUTHORIZED)

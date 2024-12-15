@@ -1,16 +1,22 @@
 import { Request, Response } from "express";
 
-import { User } from "@models/userModel";
+import { IUser, User } from "@models/userModel";
 import { statusCodes } from "@constants/statusCodes";
 import { comparePasswords, hashPassword } from "@utils/passwordHelper";
 
 export const changePassword = async (req: Request, res: Response) => {
   try {
-    const { userId, oldPassword, newPassword } = req.body;
+    const { oldPassword, newPassword } = req.body;
 
+    if (!req.user) {
+      return res
+        .status(statusCodes.UNAUTHORIZED)
+        .json({ message: "Unauthorized" });
+    }
+    const userId = (req.user as IUser)?.id;
     // Find user by ID
     const user = await User.findById(userId);
-    if (!user) {
+    if (!user || !user.password) {
       return res
         .status(statusCodes.NOT_FOUND)
         .json({ message: "User not found" });

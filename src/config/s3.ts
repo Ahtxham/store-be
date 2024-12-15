@@ -8,6 +8,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { AWS } from "@constants/env";
 import fs from "fs";
 import { HeadObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { FILE_CONFIG } from "./constants";
+import { LOGUI } from "@constants/logs";
 
 export const s3Client = new S3Client({
   region: AWS.REGION,
@@ -31,7 +33,7 @@ export const uploadFileToAws = async (
           Key: fileName,
           Body: fs.createReadStream(filePath),
           ACL: "public-read",
-          ContentType: "image/jpeg",
+          ContentType: FILE_CONFIG.ALLOWED_FILE_TYPES[0],
         })
       )
       .then(() => {
@@ -39,7 +41,7 @@ export const uploadFileToAws = async (
         if (fs.existsSync(filePath)) {
           fs.unlink(filePath, (err) => {
             if (err) {
-              console.error("Error deleting file:", err);
+              console.error(LOGUI.FgRed, "Error deleting file:", err);
             }
           });
         }

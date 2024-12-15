@@ -22,7 +22,11 @@ export const validateOtp = async (
         .json({ message: "User not found" });
     }
 
-    if (user.otp !== otp || user.otpExpires < Date.now()) {
+    if (
+      user.otp !== otp ||
+      !user.otpExpires ||
+      user.otpExpires.getTime() < Date.now()
+    ) {
       return res
         .status(statusCodes.UNAUTHORIZED)
         .json({ message: "Invalid or expired OTP" });

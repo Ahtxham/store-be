@@ -1,6 +1,15 @@
+import { AUTH_CONFIG } from "@config/constants";
 import bcrypt from "bcrypt";
 
-export const hashPassword = async (password: string): Promise<string> => {
+export const hashPassword = async (password?: string): Promise<string> => {
+  if (!password) {
+    throw new Error("Password is required");
+  }
+  if (password.length < AUTH_CONFIG.PASSWORD_MIN_LENGTH) {
+    throw new Error(
+      `Password must be at least ${AUTH_CONFIG.PASSWORD_MIN_LENGTH} characters long`
+    );
+  }
   const saltRounds = 10;
   return await bcrypt.hash(password, saltRounds);
 };

@@ -53,8 +53,8 @@ export const register = async (
     }
 
     return res.status(statusCodes.FORBIDDEN).json({
-      message: "Error while registering",
-      error: JSON.stringify(error),
+      message: error.message || "Error while registering",
+      error,
     });
   }
 };

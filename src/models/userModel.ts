@@ -1,65 +1,64 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
+import { hashPassword } from "@utils/passwordHelper";
+import { LOGUI } from "@constants/logs";
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  otp: {
-    type: String,
-    required: false,
-  },
-  otpExpires: {
-    type: Date,
-    required: false,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  dob: {
-    type: Date,
-    required: false,
-  },
-  gender: {
-    type: String,
-    required: false,
-  },
-  image: {
-    type: String,
-    required: false,
-  },
-});
-
-const User = mongoose.model("User", userSchema);
-
-export { User };
-
-export interface IUser extends mongoose.Document {
+export interface IUser extends Document {
   email: string;
   username: string;
   password?: string;
+  otp?: string;
+  otpExpires?: Date;
   createdAt: Date;
   dob?: Date;
-  gender?: string;
+  gender?: "male" | "female" | "other";
   image?: string;
 }
 
-export interface UserType {
-  email: string;
-  username: string;
-  password?: string;
-  dob?: Date;
-  gender?: string;
-  image?: string;
+interface IUserMethods {
+  toJSON(): any;
 }
+
+type UserModel = Model<IUser, {}, IUserMethods>;
+
+const userSchema = new mongoose.Schema<IUser, UserModel>(
+  {
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    username: {
+      type: String,
+      required: [true, "Username is required"],
+      unique: true,
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+      minlength: 6,
+    },
+    otp: String,
+    otpExpires: Date,
+    dob: Date,
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+    },
+    image: String,
+  },
+  {
+    timestamps: true,
+  }
+);
+
+userSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  delete obj.__v;
+  return obj;
+};
+
+export const User = mongoose.model<IUser, UserModel>("User", userSchema);

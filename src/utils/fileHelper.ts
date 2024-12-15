@@ -6,15 +6,15 @@ interface File {
   path: string;
 }
 
-export const handleFileUpload = async (file: File) => {
+export const handleFileUpload = async (file: File): Promise<string> => {
   let s3_img: string = "";
   if (file) {
     const { filename, path } = file;
-    if (AWS.ACCESSKEYID === "") {
+    if (!AWS.ACCESSKEYID) {
       s3_img = `${SERVER_URL}/${path}`;
     } else {
       try {
-        let keyName = `${path}/${filename}`;
+        const keyName = `${path}/${filename}`;
         s3_img = await uploadFileToAws(keyName, path);
       } catch (error) {
         console.error("Error during S3 upload:", error);
