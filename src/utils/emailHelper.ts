@@ -1,11 +1,12 @@
 import { sendgrid } from "@config/sendgrid";
 import { SANDGRID, MODE } from "@constants/env";
+import { LOGUI } from "@constants/logs";
 
 export const sendEmail = async (to: string, subject: string, text: string) => {
   if (MODE === "development") {
-    console.log("Email sent to:", to);
-    console.log("Subject:", subject);
-    console.log("Text:", text);
+    console.log(LOGUI.BgYellow, `=======================================`);
+    console.log(LOGUI.BgYellow, `${text}`);
+    console.log(LOGUI.BgYellow, `=======================================`);
     return;
   }
   try {
