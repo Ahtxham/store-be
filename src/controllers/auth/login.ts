@@ -5,6 +5,7 @@ import { statusCodes } from "@constants/statusCodes";
 import { User } from "@models/userModel";
 import { JWT_SECRET } from "@constants/env";
 import { comparePasswords } from "@utils/passwordHelper";
+import { generateToken } from "@utils/jwtHelper";
 
 export const login = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body;
@@ -24,9 +25,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
         .json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET as string, {
-      expiresIn: "24h",
-    });
+    const token = generateToken({ id: user._id });
     const data = { token, user: user.toObject() };
     delete data.user.password;
     delete data.user.__v;

@@ -54,3 +54,12 @@ export interface IUser extends mongoose.Document {
   gender?: string;
   image?: string;
 }
+
+export interface UserType {
+  email: string;
+  username: string;
+  password?: string;
+  dob?: Date;
+  gender?: string;
+  image?: string;
+}

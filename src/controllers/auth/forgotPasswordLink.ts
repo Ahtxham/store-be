@@ -4,6 +4,7 @@ import { statusCodes } from "@constants/statusCodes";
 import { User } from "@models/userModel";
 import { JWT_SECRET } from "@constants/env";
 import { sendEmail } from "@config/sendgrid";
+import { generateToken } from "@utils/jwtHelper";
 
 export const forgotPasswordLink = async (
   req: Request,
@@ -19,9 +20,7 @@ export const forgotPasswordLink = async (
         .json({ message: "User not found" });
     }
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET as string, {
-      expiresIn: "1h",
-    });
+    const token = generateToken({ id: user._id }, "1h");
 
     const resetLink = `${callback}?token=${token}`;
 
