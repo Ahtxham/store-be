@@ -1,3 +1,4 @@
+import { transporter } from "@config/gmail";
 import { sendgrid } from "@config/sendgrid";
 import { SANDGRID, MODE } from "@constants/env";
 import { LOGUI } from "@constants/logs";
@@ -9,10 +10,21 @@ export const sendEmail = async (to: string, subject: string, text: string) => {
     console.log(LOGUI.BgYellow, `=======================================`);
     return;
   }
+
   try {
-    await sendgrid.send({
+    
+    // SendGrid
+    // await sendgrid.send({
+    //   to,
+    //   from: SANDGRID.EMAIL_FROM,
+    //   subject,
+    //   text,
+    // });
+
+    // Gmail
+    await transporter.sendMail({
+      from: process.env.MAIL_FROM,
       to,
-      from: SANDGRID.EMAIL_FROM,
       subject,
       text,
     });

@@ -11,7 +11,7 @@ export const register = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { email, username, password, dob, gender }: IUser = req.body;
+    const { email, username, password, age, city }: IUser = req.body;
 
     if (!email || !password)
       return res
@@ -30,8 +30,8 @@ export const register = async (
       email,
       username: username || email,
       password: hashedPassword,
-      dob,
-      gender,
+      age,
+      city,
       image: s3_img || undefined,
     });
     await user.save();

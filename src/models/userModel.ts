@@ -6,11 +6,11 @@ export interface IUser extends Document {
   email: string;
   username: string;
   password?: string;
+  age: string;
+  city: string;
   otp?: string;
   otpExpires?: Date;
   createdAt: Date;
-  dob?: Date;
-  gender?: "male" | "female" | "other";
   image?: string;
 }
 
@@ -40,13 +40,18 @@ const userSchema = new mongoose.Schema<IUser, UserModel>(
       required: [true, "Password is required"],
       minlength: 6,
     },
+    age: {
+      type: String,
+      required: [true, "Age is required"],
+      trim: true,
+    },
+    city: {
+      type: String,
+      required: [true, "City is required"],
+      trim: true,
+    },
     otp: String,
     otpExpires: Date,
-    dob: Date,
-    gender: {
-      type: String,
-      enum: ["male", "female", "other"],
-    },
     image: String,
   },
   {
