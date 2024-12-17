@@ -75,9 +75,16 @@ export const updatePet = async (
   try {
     const { name, breed, gender, dob, petmap, location } = req.body;
     const owner = (req.user as any)?.id;
+    let updateData: any = { name, breed, gender, dob, petmap, location };
+
+    if (req.file) {
+      const image = await handleFileUpload(req.file);
+      updateData.image = image;
+    }
+
     const pet = await Pet.findOneAndUpdate(
       { _id: req.params.id, owner },
-      { name, breed, gender, dob, petmap, location },
+      updateData,
       { new: true }
     );
     if (!pet) {
