@@ -11,6 +11,8 @@ export interface IPost extends Document {
   hashtags: string[];
   isPublic: boolean;
   owner: mongoose.Types.ObjectId;
+  likes: mongoose.Types.ObjectId[];
+  comments: mongoose.Types.ObjectId[];
 }
 
 const postSchema = new mongoose.Schema<IPost>(
@@ -51,6 +53,18 @@ const postSchema = new mongoose.Schema<IPost>(
       ref: "User",
       required: true,
     },
+    likes: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    comments: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   {
     timestamps: true,
