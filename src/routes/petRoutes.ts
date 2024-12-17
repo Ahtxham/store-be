@@ -27,3 +27,5 @@ router.put("/:id", authMiddleware, (req, res, next) => {
 router.delete("/:id", authMiddleware, (req, res, next) => {
   deletePet(req, res).catch(next);
 });
+
+export { router as petRoutes };
