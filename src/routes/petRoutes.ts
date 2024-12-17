@@ -12,16 +12,16 @@ import { authMiddleware } from "@middlewares/authMiddleware";
 const fileHelper = uploadHelper("./uploads/profiles").single("profile");
 const router = Router();
 
-router.get("/", fileHelper, authMiddleware, (req, res, next) => {
+router.get("/", authMiddleware, (req, res, next) => {
   getPets(req, res).catch(next);
 });
 router.get("/:id", authMiddleware, (req, res, next) => {
   getPetById(req, res).catch(next);
 });
-router.post("/", authMiddleware, (req, res, next) => {
+router.post("/", authMiddleware, fileHelper, (req, res, next) => {
   createPet(req, res).catch(next);
 });
-router.put("/:id", authMiddleware, (req, res, next) => {
+router.put("/:id", authMiddleware, fileHelper, (req, res, next) => {
   updatePet(req, res).catch(next);
 });
 router.delete("/:id", authMiddleware, (req, res, next) => {

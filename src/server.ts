@@ -18,11 +18,9 @@ const options = {
 };
 
 // Create HTTPS server
-// const server =
-//   MODE === "development"
-//     ? HttpServer(app)
-//     : HttpsServer(options, app);
+const server =
+  MODE === "development" ? HttpServer(app) : HttpsServer(options, app);
 
-const server = HttpsServer(options, app);
+// const server = HttpsServer(options, app);
 
 export { server };
