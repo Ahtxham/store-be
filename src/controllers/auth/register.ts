@@ -11,8 +11,8 @@ export const register = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { email, username, password, dob, gender }: IUser = req.body;
-
+    const { email, username, password, city, dob }: IUser = req.body;
+    
     if (!email || !password)
       return res
         .status(statusCodes.BAD_REQUEST)
@@ -30,8 +30,8 @@ export const register = async (
       email,
       username: username || email,
       password: hashedPassword,
+      city,
       dob,
-      gender,
       image: s3_img || undefined,
     });
     await user.save();
@@ -43,7 +43,7 @@ export const register = async (
     }
     return res
       .status(statusCodes.CREATED)
-      .json({ message: "User registered successfully", data });
+      .json({ message: "User registered successfully", user: data });
   } catch (error: any) {
     if (error?.code === 11000) {
       return res.status(statusCodes.FORBIDDEN).json({

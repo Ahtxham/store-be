@@ -8,10 +8,10 @@ export interface IUser extends Document {
   password?: string;
   otp?: string;
   otpExpires?: Date;
-  createdAt: Date;
   dob?: Date;
   gender?: "male" | "female" | "other";
   image?: string;
+  city: string;
 }
 
 interface IUserMethods {
@@ -42,6 +42,11 @@ const userSchema = new mongoose.Schema<IUser, UserModel>(
     },
     otp: String,
     otpExpires: Date,
+    city: {
+      type: String,
+      required: [true, "City is required"],
+      trim: true,
+    },
     dob: Date,
     gender: {
       type: String,
